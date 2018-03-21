@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>underwater</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mina:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quantico|Quicksand" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/master.css' %}" >
+    <style>
+    #navbar{
+      margin-bottom: 0px;
+    }
+    .container{
+      width: 100%;
+      margin-bottom: : 0px;
+      padding: 0px;
+      /* background-color: yellow; */
+    }
+    .mynav{
+     background-color:#ecf0f1;
+      font-size: 1.5em;
+      color: black;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+      height: 30px;
+
+    }
+    .line{
+      border-right: 1px solid #ccc;
+    }
+    #mycontent{
+      margin-top: 50px;
+      }
+
+    .sidebar{
+      margin-top: 40px;
+      font-size: 1.2em;
+      font-weight: 600;
+      /* border:1px solid #3498db; */
+      }
+    .sidebar>a:hover{
+      border: 1px solid #3498db;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+    .table-responsive{
+      margin-left: 20px;
+      margin-top: 0px;
+    }
+
+  .road>p{
+      margin-left: 60px;
+      font-size: 1.6em;
+
+      font-family: 'Mina', sans-serif;
+
+    }
+    a{
+      color: white;
+      font-family: 'Quicksand', sans-serif;
+      color: black;
+      text-decoration: none;
+      }
+
+    .username{
+      margin-left: 0px;
+    }
+    .logout{
+      margin-right: 50px;
+    }
+    .heading{
+      font-size: 1.2em;
+    }
+    .middle{
+      margin-top: 30px;
+    }
+
+    .middle>p{
+      font-size: 1.5em;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Quicksand', sans-serif;
+
+    }
+
+    .bottom>p{
+      font-size: 1.5em;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Quicksand', sans-serif;
+
+    }
+
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar mynav navbar-fixed-top" role='navigation' id='navbar'>
+      <div class='container'>
+        <a class="navbar-brand road" href="{% url 'home' %}"><p>Road Submergence</p></a>
+        <ul class='nav navbar-nav navbar-right'>
+          {% if user.is_authenticated %}
+
+            <li class="username"><a href="#"> Welcome : {{user.username}} </a></li>
+             <li class="logout"><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+
+
+          {% else %}
+              <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+              <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+</div></nav>
+
+
+    <div class="container" id="mycontent">
+      <div class="col-md-2">
+        <div class="line">
+        <ul class="nav nav-pills nav-stacked sidebar">
+          <li role="presentation" ><a href="#">Rainfall Prediction</a></li>
+          <li role="presentation"><a href="#">Dam Discharge Prediction</a></li>
+          <li role="presentation"><a href="#">Road Submergence Prediction</a></li>
+        </ul>
+
+
+      </div></div>
+
+      <div class="col-md-10">
+
+        <div class="top">
+
+        </div>
+
+
+        <div class="middle">
+          <p>Table showing the Predicted data for Rainfall </p>
+              {% if rain %}
+              <div class="table-responsive">
+              <table class="table table-hover">
+              <thead class="heading">
+              <tr>
+              <th>#</th>
+              <th>Month</th>
+              <th>Rainfall Prediction (mm)</th>
+              </tr>
+              </thead>
+
+              {% for i in rain %}
+              <tbody>
+              <tr>
+              <td><p>{{ i.id }}</p></td>
+              <td><p>{{ i.date }}</p></td>
+              <td><p>{{ i.rain_length }}</p></td>
+              </tr>
+              </tbody>
+              {% endfor %}
+              </table>
+              </div>
+              {% endif %}
+
+        </div>
+        <hr>
+        <div class="bottom">
+          <p>Bar-Graph Showing Rainfall Prediction</p>
+          <div id="bar-example" style="height: 250px;"></div><hr>
+          <p>Donut-Graph Showing Rainfall Prediction</p>
+          <div id="donut-example" style="height: 250px;"></div>
+
+        </div>
+
+        </div>
+      </div>
+
+<script type="text/javascript">
+
+
+  Morris.Bar({
+  element: 'bar-example',
+
+      data: [
+          {% for i in rain %}
+              { year: '{{ i.date }}', value:' {{ i.rain_length }}'},
+          {% endfor %}
+        ],
+  xkey: 'year',
+  ykeys: ['value'],
+  labels: ['Value']
+});
+Morris.Donut({
+  element: 'donut-example',
+
+  data: [
+    {% for i in rain %}
+        { label: '{{ i.date }}', value:' {{ i.rain_length }}'},
+    {% endfor %}
+  ],
+});
+
+
+
+</script>
+  </body>
+</html>

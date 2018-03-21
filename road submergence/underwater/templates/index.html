@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>underwater</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Signika:700" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> -->
+    <style>
+    .container{
+      width: 100%;
+    }
+     .mynav{
+      background-color: #2c3e50;
+       font-weight: bold;
+       font-size: 1.5em;
+       color: white;
+     }
+     a{
+       color: white;
+     }
+     .intro{
+       /* background-color: red; */
+       height: 70vh;
+
+     }
+     .svg{
+       background-color: yellow;
+       height: 30vh;
+       width: 100%;
+     }
+     .problem{
+       background-color: green;
+       height: 50vh;
+     }
+     .ani{
+       background-color: grey;
+       height: 30vh;
+     }
+     .problem1{
+       background-color: blue;
+       height: 50vh;
+     }
+     .problem2{
+       background-color: black;
+       height: 50vh;
+     }
+     .first>h1{
+       margin-top: 70px;
+      color: #3d3d47;
+      font-family: 'Signika', sans-serif;
+      text-align: center;
+    }
+    .first>p{
+      font-size: 1.3em;
+      margin-top: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #636e72;
+      }
+      .first>h2{
+
+      }
+      .head-solution{
+        height: 10vh;
+      }
+
+    </style>
+    </head>
+  <body>
+    <nav class="navbar navbar-fixed-top mynav" role='navigation' id='navbar'>
+      <div class='container'>
+        <a class="navbar-brand mynav" href="{% url 'home' %}">Road Submergence</a>
+        <ul class='nav navbar-nav navbar-right'>
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+          {% else %}
+              <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+              <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+
+    </nav>
+  <div class="container">
+    <div class="intro">
+      <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="first">
+        <h1>Welcome to Road-Submergence site! </h1>
+      <p>One of the primary task of Road & Building Department of Government of Gujarat department is to provide village
+         connectivity to all revenue villages and their habitations with all
+          road network to connect them with Taluka/District Head Quarters. This
+  road connectivity ensures the services like Health, Education,
+Social Services, Agricultural product marketing etc. to all the citizens
+residing in rural areas.</p><h2>Problem :</h2><p>During very heavy rains and also in case of sudden
+discharge of flood water from Dams, these roads get submerged and the
+villages/habitations are inaccessible for many days resulting into untold
+   hardship to villages and they cut off with all basic services.</p></div>
+   <div class="col-md-1"></div>
+    </div>
+    </div>
+    <div class="svg">
+    <div class="col-md-6 text"></div>
+    <div class="col-md-6 ani"></div>
+    </div>
+    <div class="head-solution"></div>
+    <div class="problem">
+      <div class="col-md-4 problem1"></div>
+      <div class="col-md-4 problem2"></div>
+      <div class="col-md-4 problem3"></div>
+    </div>
+    <div class="footer"></div>
+
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "loginformbase.html" %}
+{% load bootstrap3%}
+
+
+{% block content %}
+  
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-info" value="Login">
+    </form>
+
+
+{% endblock %}
