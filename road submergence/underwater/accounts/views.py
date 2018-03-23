@@ -4,8 +4,10 @@ from django.views.generic import CreateView,TemplateView
 from . import forms
 import requests
 from .models import Rain
-
 from graphos.renderers.gchart import LineChart
+from rest_framework import viewsets
+from . import serializers
+from . import models
 
 
 # Create your views here.
@@ -27,3 +29,9 @@ class ThanksPage(TemplateView):
 
 class HomePage(TemplateView):
     template_name = 'index.html'
+
+
+class UserProfileViewset(viewsets.ModelViewSet):
+
+    serializer_class = serializers.UserProfileSerializer
+    queryset= models.User.objects.all()
