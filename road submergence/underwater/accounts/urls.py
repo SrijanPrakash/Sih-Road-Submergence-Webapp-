@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 app_name = 'accounts'
 router=DefaultRouter()
 router.register('profile',views.UserProfileViewset)
+router.register('login',views.LoginViewSet,base_name='login')
 
 
 urlpatterns = [
@@ -14,7 +15,7 @@ urlpatterns = [
      name='login'),
     url(r'logout/$',auth_views.LogoutView.as_view(),name='logout'),
     url(r'signup/$',views.SignUp.as_view(),name='signup'),
-    url('',include(router.urls))
+    url(r'',include(router.urls))
 
 
 ]
