@@ -6,6 +6,9 @@ import requests
 from .models import Rain
 from graphos.renderers.gchart import LineChart
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework import filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -27,13 +30,17 @@ def rain(request):
     return render(request,'test.html',context=data_dict)
 
 
-
 class ThanksPage(TemplateView):
     template_name='thanks.html'
 
 class HomePage(TemplateView):
     template_name = 'index.html'
 
+class LoadPage(TemplateView):
+    template_name='load.html'
+
+class MailPage(TemplateView):
+    template_name='mail.html'
 
 class UserProfileViewset(viewsets.ModelViewSet):
 
@@ -46,6 +53,6 @@ class LoginViewSet(viewsets.ViewSet):
 
     serializer_class=AuthTokenSerializer
 
-    def create(self,request):
+    def create(self, request):
 
         return ObtainAuthToken().post(request)

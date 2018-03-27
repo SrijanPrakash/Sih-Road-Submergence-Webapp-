@@ -20,10 +20,12 @@ from accounts import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.HomePage.as_view(),name='home'),
+    url(r'^$',views.LoadPage.as_view(),name='load'),
+    url(r'^home/$',views.HomePage.as_view(),name='home'),
     url(r'accounts/',include('accounts.urls',namespace='accounts')),
     url(r'accounts/',include('django.contrib.auth.urls')),
-    url(r'test/$',views.rain,name='test'),
+    url(r'test/',views.rain,name='test'),
+    url(r'^mail/',views.MailPage.as_view(),name='mail'),
     url(r'^api/',include('accounts.urls')),
     url(r'thanks/$',views.ThanksPage.as_view(),name='thanks'),
 ]

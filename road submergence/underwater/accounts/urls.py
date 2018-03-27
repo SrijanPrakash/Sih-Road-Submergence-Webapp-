@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 app_name = 'accounts'
 router=DefaultRouter()
 router.register('profile',views.UserProfileViewset)
-router.register('login',views.LoginViewSet,base_name='login')
+router.register('log',views.LoginViewSet,base_name='log')
 
 
 urlpatterns = [
