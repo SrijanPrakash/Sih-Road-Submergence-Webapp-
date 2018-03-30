@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Rainfall | Prediction</title>
+    <title>Road Submergence | Day</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -139,7 +139,7 @@
             <li role="presentation" ><a href="{% url 'test' %}">Rainfall Prediction</a></li>
             <li role="presentation"><a href="{% url 'damyear' %}">Dam Discharge Prediction for year 2018</a></li>
             <li role="presentation"><a href="{% url 'damday' %}">Dam Discharge Prediction for 15 days in April</a></li>
-            <li role="presentation"><a href="{% url 'geoip' %}">Geoip of the user location.</a></li>
+            <li role="presentation"><a href="{% url 'geoip' %}">Geoip of the user location.</a></li>  
             <li role="presentation"><a href="{% url 'roadsubyear' %}">Road Submergence Prediction for year 2018</a></li>
             <li role="presentation"><a href="{% url 'roadsubday' %}">Road Submergence Prediction for 15 days in April</a></li>
             <li role="presentation"><a href="{% url 'mail' %}">Send Email</a></li>
@@ -158,24 +158,26 @@
 
 
         <div class="middle" id="rainfall-table">
-          <p>Table showing the Predicted data for Rainfall </p>
-              {% if rain %}
+          <p>Table showing the length of Water on the Road in coming 15 days </p>
+              {% if roadsubday %}
               <div class="table-responsive">
               <table class="table table-hover">
               <thead class="heading">
               <tr>
               <th>#</th>
-              <th>Month</th>
-              <th>Rainfall Prediction (cm)</th>
+              <th>Date</th>
+              <th>Length Prediction (cm)</th>
+              <th>Status</th>
               </tr>
               </thead>
 
-              {% for i in rain %}
+              {% for i in roadsubday %}
               <tbody>
               <tr>
               <td><p>{{ i.id }}</p></td>
               <td><p>{{ i.date }}</p></td>
-              <td><p>{{ i.rain_length }}</p></td>
+              <td><p>{{ i.date_discharge }}</p></td>
+              <td><p>{{ i.road_submergence }}</p></td>
               </tr>
               </tbody>
               {% endfor %}
@@ -187,9 +189,9 @@
         <button class="btn btn-danger" onclick="javascript:demoFromHTML();">Make PDF</button>
         <hr>
         <div class="bottom">
-          <p>Bar-Graph Showing Rainfall Prediction</p>
+          <p>Bar-Graph Showing length of Water on the Road</p>
           <div id="bar-example" style="height: 250px;"></div><hr>
-          <p>Donut-Graph Showing Rainfall Prediction</p>
+          <p>Donut-Graph Showing length of Water on the Road</p>
           <div id="donut-example" style="height: 250px;"></div>
 
         </div>
@@ -235,8 +237,8 @@ function demoFromHTML() {
   element: 'bar-example',
 
       data: [
-          {% for i in rain %}
-              { year: '{{ i.date }}', value:' {{ i.rain_length }}'},
+          {% for i in roadsubday %}
+              { year: '{{ i.date }}', value:' {{ i.date_discharge }}'},
           {% endfor %}
         ],
   xkey: 'year',
@@ -247,8 +249,8 @@ Morris.Donut({
   element: 'donut-example',
 
   data: [
-    {% for i in rain %}
-        { label: '{{ i.date }}', value:' {{ i.rain_length }}'},
+    {% for i in roadsubday %}
+        { label: '{{ i.date }}', value:' {{ i.date_discharge }}'},
     {% endfor %}
   ],
 });

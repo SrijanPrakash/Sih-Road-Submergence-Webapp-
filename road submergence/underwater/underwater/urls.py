@@ -26,6 +26,12 @@ urlpatterns = [
     url(r'accounts/',include('django.contrib.auth.urls')),
     url(r'test/',views.rain,name='test'),
     url(r'^mail/',views.MailPage.as_view(),name='mail'),
+    url(r'dam-year/',views.damyear,name='damyear'),
+    url(r'dam-month/',views.damday,name='damday'),
+    url(r'road-sub-year/',views.roadsubyear,name='roadsubyear'),
+    url(r'road-sub-day/',views.roadsubday,name='roadsubday'),
     url(r'^api/',include('accounts.urls')),
     url(r'thanks/$',views.ThanksPage.as_view(),name='thanks'),
+    url(r'sms/$',views.sms,name="sms"),
+    url(r'geoip/$',views.geoip,name='geoip')
 ]

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'bootstrap3',
     'accounts',
     'rest_framework',
-    
+    'django_twilio'
+
 ]
 
 MIDDLEWARE = [

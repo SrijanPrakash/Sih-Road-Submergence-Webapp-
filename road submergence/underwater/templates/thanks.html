@@ -1,5 +1,65 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ThankYou | Be Back Soon</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/css/master.css' %}" >
+    <style>
+    .mynav{
+     background-color: #2c3e50;
 
-{% block content %}
-<h1>Thanks for visiting, Come back Soon!</h1>
-{% endblock %}
+      font-size: 1.5em;
+      color: white;
+    }
+    a{
+      color: white;
+    }
+    .col-sm-8 p{
+      margin-top: 60px;
+      font-size: 1.7em;
+      font-weight: bold;
+    }
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar mynav navbar-static-top" role='navigation' id='navbar'>
+      <div class='container'>
+        <a class="navbar-brand mynav" href="{% url 'home' %}">Road Submergence</a>
+        <ul class='nav navbar-nav navbar-right'>
+          {% if user.is_authenticated %}
+
+            <li><a href="#"> Welcome : {{user.username}} </a></li>
+             <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+
+
+          {% else %}
+              <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+              <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+
+    </nav>
+    <div class="container mycontent">
+        <div class="col-sm-8">
+              <p> ThankYou for visiting this page....hope to see you soon</p>
+        </div>
+      <div class="col-sm-4">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3kJ40GfMd404ukPy-jps2g0rravp4MEgHRGg3ZuxEBBPT_RaUsg" alt="">
+      </div>
+
+
+        <p style="margin-top:150px"> * The site contains data that is just for display purpose and might be wrong..</p>
+
+    </div>
+
+
+  </body>
+</html>

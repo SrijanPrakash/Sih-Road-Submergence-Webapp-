@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Rainfall | Prediction</title>
+    <title>underwater</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -55,59 +55,69 @@
       color: black;
       text-decoration: none;
     }
-    .table-responsive{
-      margin-left: 20px;
-      margin-top: 30px;
+  }
+  .table-responsive{
+    margin-left: 20px;
+    margin-top: 0px;
+  }
+
+.road>p{
+    margin-left: 60px;
+    font-size: 1.6em;
+
+    font-family: 'Mina', sans-serif;
+
+  }
+  a{
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    text-decoration: none;
     }
 
-  .road>p{
-      margin-left: 60px;
-      font-size: 1.6em;
+  .username{
+    margin-left: 0px;
+  }
+  .logout{
+    margin-right: 50px;
+  }
+  .heading{
+    font-size: 1.2em;
+  }
+  .form{
+    margin-left: 25%;
+    margin-top: 10%;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .form>input{
+    /* background-color: #eee; */
+    /* border: 1px solid darkturquoise; */
+    margin-top: 6px;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 1em;
+    font-family: monospace;
+  }
+  .btn{
+    margin-left: 40px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 10%;
+  }
+  .box{
+    margin-left: 40px;
+    margin-top: 50px;
 
-      font-family: 'Mina', sans-serif;
-
-    }
-    a{
-      color: white;
-      font-family: 'Quicksand', sans-serif;
-      color: black;
-      text-decoration: none;
-      }
-
-    .username{
-      margin-left: 0px;
-    }
-    .logout{
-      margin-right: 50px;
-    }
-    .heading{
-      font-size: 1.2em;
-    }
-    .middle{
-      margin-top: 30px;
-    }
-
-    .middle>p{
-      font-size: 1.5em;
-      text-align: center;
-      font-weight: bold;
-      font-family: 'Quicksand', sans-serif;
-
-    }
-
-    .bottom>p{
-      font-size: 1.5em;
-      text-align: center;
-      font-weight: bold;
-      font-family: 'Quicksand', sans-serif;
+  }
+.box input{
+  width: 250px;
+  height:40px;
+  font-family: monospace;
 }
-.btn{
-  margin-left: 86%;
-  font-size: 1.1em;
-  font-weight: bold;
-  font-family: 'Quicksand', sans-serif;
-  letter-spacing: 1.3px;
-}
+
+
 
 
 
@@ -139,119 +149,30 @@
             <li role="presentation" ><a href="{% url 'test' %}">Rainfall Prediction</a></li>
             <li role="presentation"><a href="{% url 'damyear' %}">Dam Discharge Prediction for year 2018</a></li>
             <li role="presentation"><a href="{% url 'damday' %}">Dam Discharge Prediction for 15 days in April</a></li>
-            <li role="presentation"><a href="{% url 'geoip' %}">Geoip of the user location.</a></li>
+              <li role="presentation"><a href="{% url 'geoip' %}">Geoip of the user location.</a></li>
             <li role="presentation"><a href="{% url 'roadsubyear' %}">Road Submergence Prediction for year 2018</a></li>
             <li role="presentation"><a href="{% url 'roadsubday' %}">Road Submergence Prediction for 15 days in April</a></li>
             <li role="presentation"><a href="{% url 'mail' %}">Send Email</a></li>
             <li role="presentation"><a href="{% url 'sms' %}">Send Sms</a></li>
-          </ul>
 
+          </ul>
 
 
       </div></div>
 
       <div class="col-md-10">
 
-        <div class="top">
+        <form method="POST">
+                {% csrf_token %}
+                  <div class="box">
+                  <input type="text" name="sendto" size="40" placeholder="Send-To"><br><br>
+                  </div>
 
-        </div>
+                  <br><input type="submit" class="btn btn-primary" value="Send">
+              </form>
 
+</div>
 
-        <div class="middle" id="rainfall-table">
-          <p>Table showing the Predicted data for Rainfall </p>
-              {% if rain %}
-              <div class="table-responsive">
-              <table class="table table-hover">
-              <thead class="heading">
-              <tr>
-              <th>#</th>
-              <th>Month</th>
-              <th>Rainfall Prediction (cm)</th>
-              </tr>
-              </thead>
-
-              {% for i in rain %}
-              <tbody>
-              <tr>
-              <td><p>{{ i.id }}</p></td>
-              <td><p>{{ i.date }}</p></td>
-              <td><p>{{ i.rain_length }}</p></td>
-              </tr>
-              </tbody>
-              {% endfor %}
-              </table>
-              </div>
-              {% endif %}
-
-        </div>
-        <button class="btn btn-danger" onclick="javascript:demoFromHTML();">Make PDF</button>
-        <hr>
-        <div class="bottom">
-          <p>Bar-Graph Showing Rainfall Prediction</p>
-          <div id="bar-example" style="height: 250px;"></div><hr>
-          <p>Donut-Graph Showing Rainfall Prediction</p>
-          <div id="donut-example" style="height: 250px;"></div>
-
-        </div>
-
-        </div>
-
-      </div>
-
-<script type="text/javascript">
-
-function demoFromHTML() {
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    source = $('#rainfall-table')[0];
-    specialElementHandlers = {
-
-        '#bypassme': function (element, renderer) {
-
-            return true
-        }
-    };
-    margins = {
-        top: 80,
-        bottom: 60,
-        left: 40,
-        width: 522
-    };
-
-    pdf.fromHTML(
-    source,
-    margins.left,
-    margins.top, {
-        'width': margins.width,
-        'elementHandlers': specialElementHandlers
-    },
-
-    function (dispose) {
-
-        pdf.save('Rainfall-Prediction.pdf');
-    }, margins);
-}
-
-  Morris.Bar({
-  element: 'bar-example',
-
-      data: [
-          {% for i in rain %}
-              { year: '{{ i.date }}', value:' {{ i.rain_length }}'},
-          {% endfor %}
-        ],
-  xkey: 'year',
-  ykeys: ['value'],
-  labels: ['Value']
-});
-Morris.Donut({
-  element: 'donut-example',
-
-  data: [
-    {% for i in rain %}
-        { label: '{{ i.date }}', value:' {{ i.rain_length }}'},
-    {% endfor %}
-  ],
-});
 
 
 
