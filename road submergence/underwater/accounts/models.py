@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.conf import settings
 
 
+
 # Create your models here.
 class User(auth.models.User,auth.models.PermissionsMixin):
 
